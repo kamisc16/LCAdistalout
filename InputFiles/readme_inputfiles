@@ -11,3 +11,5 @@ This folder contains R code for generating mplus input files for LCA with distal
 
 Two Step Method needs to be added. 
 
+For all input file generators, the numsim is set low. Will need to adjust to 500 for actual run. 
+
