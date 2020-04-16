@@ -1,5 +1,5 @@
 ####################################
-#Input file for first step of Three Step
+#Input file for third step of Three Step
 ####################################
 
 
