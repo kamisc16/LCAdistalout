@@ -9,16 +9,22 @@ require(MplusAutomation)
 #Specifying no log file to be created 
 
 #One Step
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/OneStepinp.R")
 runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/OneStepinp/", 
           recursive=T, logFile=NULL)
+
 #Three Step (Step 1 & 3)
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/ThreeStepinp1.R")
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/ThreeStepinp3.R")
 runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/3Stepinp/", 
           recursive=T, logFile=NULL)
 
 #ML manual (Step 1)
 #To do this we have to run the first batch of step-one files 
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/MLinp_manual.R")
 runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/MLinpMan/", 
           recursive=T, logFile=NULL)
+
 #ML manual (Step 3)
 #first run R-script to get batch of new input files 
 source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/MLinp_manual_step3.R")
@@ -26,10 +32,20 @@ runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/Simulation
           recursive=T, logFile=NULL)
 
 #BCH manual (Step 1 & 3)
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/BCHinp_manual.R")
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/BCHinp_manual_step3.R")
 runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/BCHinpMan/", 
           recursive=T, logFile=NULL)
 
+#Two Step (Step 1)
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/TwoStepinp1.R")
+runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/", 
+          recursive=T, logFile=NULL)
 
+#Two Step (Step 2)
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/TwoStepinp2.R")
+runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/Step2/", 
+          recursive=T, logFile=NULL)
 ####################################
 
 #now I can read all of those output files using the same MplusAutomation package
