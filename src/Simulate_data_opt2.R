@@ -34,10 +34,7 @@
 ################################
 ################################
 #load pacakages
-require(mice)
 require(MASS)
-require(norm)
-require(VIM)
 ################################
 N=5000
 #number of cases per data set
@@ -153,7 +150,7 @@ for(class.size in c("equal","Sunequal","unequal")) {
                     col.names=FALSE,
                     row.names=FALSE, 
                     na =".",
-                    file=paste("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/SimulatedData/",data.cond, sep=""))
+                    file=paste("results/",data.cond, sep=""))
         
       }
     }

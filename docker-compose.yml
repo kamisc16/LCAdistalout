@@ -1,0 +1,8 @@
+version: "3"
+services:
+  lca-distal-out:
+    image: ckamis/lca-distal-out
+    volumes:
+      - ./src:/usr/workspace/src
+      - ./InputFiles:/usr/workspace/InputFiles
+      - ./results:/usr/workspace/results
