@@ -15,3 +15,10 @@ Simulated data only has two conditions. Will add more conditions.
 Two-Step Method not yet included. Will update all files once code is written. 
 
 
+## Docker
+To run the `Simulate_data_opt2` R script using Docker, run:
+```
+docker-compose run lca-distal-out
+```
+
+Results will be output to the `./results/` directory.
