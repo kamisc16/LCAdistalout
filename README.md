@@ -13,5 +13,6 @@ Simulate_data_opt2 = R code to create simulated data. Currently only changing tw
 # Note
 Simulated data only has two conditions. Will add more conditions. 
 Two-Step Method not yet included. Will update all files once code is written. 
+Also note that One-Step method current switching classes between runs. Will write code within the Results_Gather.R to rearrange results after each run.
 
 
