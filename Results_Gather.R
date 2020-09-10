@@ -5,8 +5,10 @@
 require(MplusAutomation)
 ####################################
 
+#function source() runs R script that creates input files based off of conditions of data 
 #function runModels() runs through all input files in a subdirectory one by one. 
 #Specifying no log file to be created 
+
 
 #One Step
 source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/OneStepinp.R")
@@ -46,17 +48,21 @@ runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/Simulation
 source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/TwoStepinp2.R")
 runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/Step2/", 
           recursive=T, logFile=NULL)
+
+source("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/InputFileGenerate/TwoStepinp2B.R")
+runModels("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/Step2B/", 
+          recursive=T, logFile=NULL)
 ####################################
 
 #now I can read all of those output files using the same MplusAutomation package
 #outputs are stored in the same file that inputs were stored in**
 
 #OneStep
-numsim=10
+numsim=100
 
 
 for(class.size in c("equal","Sunequal","unequal")) {
-  for(class.sep in c("low","medium","high")){
+  for(class.sep in c("low")){
     Distalmeans=matrix(NA,numsim,5)   
       for(n in 1:numsim){
         data.cond <- paste(paste("sim-data",
@@ -128,7 +134,7 @@ for(class.size in c("equal","Sunequal","unequal")) {
 
 ####################################
 #ML (manual)
-
+numsim=10
 for(class.size in c("equal","Sunequal","unequal")) {
   for(class.sep in c("low","medium","high")){
     Distalmeans=matrix(NA,numsim,5)   
@@ -204,6 +210,39 @@ if(n==numsim){
   Filename=paste("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/Full_Results/BCHman/",data.cond,paste(".txt"), sep="")
   write.table(Distalmeans, Filename)
 }
-}}}
+    }}}
 
 
+####################################
+#Two Step
+
+for(class.size in c("equal","Sunequal","unequal")) {
+  for(class.sep in c("low","medium","high")){
+    Distalmeans=matrix(NA,numsim,5)   
+    for(n in 1:numsim){
+      
+class.size="equal"
+class.sep="high"
+n=1
+      data.cond <- paste(paste("sim-data",
+                               class.size,
+                               class.sep,
+                               n,
+                               sep="-"),sep="")  
+      
+      Output1=paste("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/inp-",data.cond,paste(".out"), sep="")
+      Output2=paste("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/Step2/inp-step2-",data.cond,paste(".out"), sep="")
+      Output2b=paste("/Users/christinakamis/Documents/DukeSociology/Dissertation/SimulationStudy/Results/InputFiles/TwoStepinp/Step2B/inp-step2-",data.cond,paste(".out"), sep="")
+      
+      #This is reading in the results
+      Results1=readModels(Output1)
+      Results2=readModels(Output2)
+      Results2B=readModels(Output2b)
+      
+#Pulling out the parameters (unstandardized)
+Parameters1=Results1$parameters$unstandardized 
+Parameters2=Results2$parameters$unstandardized  
+Parameters2B=Results2B$parameters$unstandardized  
+
+sigma11=as.matrix(Parameters1[,4]) ## SE estimates from step 1
+I22=as.matrix(c(Parameters2B[1,3],Parameters2B[7,3],Parameters2B[13,3]))
